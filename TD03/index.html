@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .error {
+            color: rebeccapurple;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>My first page</h1>
+        {{ message }}
+        <br>
+        <input type="text" name="name" v-model="newNames" id="">
+        <button v-on:click="addName">add name</button>
+        <ul>
+            <li v-for="name in names">{{ name }}</li>
+        </ul>
+
+        <h2 :class="className">test color title change</h2>
+        <button @click="changeColor">change color</button>
+    </div>
+
+    <script>
+        const myVueApp = {
+            data() {
+                return {
+                    message: "salut les gens",
+                    data: {
+                        le: "l'heure actuel" + new Date().toDateString()
+                    },
+                    names: ["Toto", "Mat", "Truc"],
+                    newNames: '',
+                    className: "error",
+                    success: false
+
+                }
+            },
+            methods: {
+                addName() {
+                    console.log("test", this.newNames);
+                    this.names.push(this.newNames)
+                    this.newNames = ''
+                },
+                changeColor() {
+                    console.log("object", this.success);
+                    if (this.success) {
+                        // this.success = false
+                        return this.className = "error"
+                    } else {
+                        // this.success = true
+                        return this.className = "success"
+                    }
+                }
+            }
+        }
+        Vue.createApp(myVueApp).mount('.container');
+    </script>
+</body>
+
+</html>

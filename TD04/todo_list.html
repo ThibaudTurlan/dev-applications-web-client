@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List VueJS</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <style>
+        .task-complete {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>List de tache</h4>
+    <div class="container">
+        <form action="">
+            <input type="text" name="newTask" v-model="newTask">
+            <button type="button" @click="addTask()">Add</button>
+        </form>
+        <ul>
+            <li v-for="task in tasks">
+                <input type="checkbox" v-model="task.completed">
+                <!-- <button @click="toggleTask(task)">on/off</button>&nbsp -->
+                <span :class="{'task-complete' : task.completed}">{{ task.description }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const myVueApp = {
+            data() {
+                return {
+                    tasks: [{
+                            description: "faire tache 1",
+                            completed: false
+                        },
+                        {
+                            description: "faire tache 2",
+                            completed: false
+                        },
+                        {
+                            description: "faire tache 3",
+                            completed: false
+                        }
+                    ],
+                    newTask: ""
+                }
+            },
+            methods: {
+                toggleTask(task) {
+                    console.log("click");
+                    task.completed = !task.completed;
+                },
+                addTask() {
+                    console.log("test", this.newTask);
+                    this.tasks.push(this.newTask)
+                    console.log(this.tasks);
+                    this.newTask = ''
+                },
+            }
+        }
+        Vue.createApp(myVueApp).mount('.container');
+    </script>
+</body>
+
+</html>

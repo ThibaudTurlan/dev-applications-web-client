@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .block {
+            width: 285px;
+            height: 155px;
+            background: rebeccapurple;
+            border-radius: 5px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <div class="block" :style="position">
+            <button @click="togglesPosition('top')">top left</button>
+            <button @click="togglesPosition('bottom')">bottom left</button>
+            <button @click="togglesPosition('rightBottom')">right bottom</button>
+            <button @click="togglesPosition('right')">right top</button>
+        </div>
+    </div>
+
+
+    <script>
+        const myVueApp = {
+            data() {
+                return {
+                    message: "salut les gens",
+                    position: {top: 0},
+                }
+            },
+            methods: {
+                togglesPosition(position) {
+                    if (position == "top") {
+                        return this.position = { top: 0 };
+                    }
+                    else if (position == "bottom") {
+                        return this.position = { bottom: 0 };
+                    }
+                    else if (position == "rightBottom") {
+                        return this.position = { right : 0, bottom: 0 };
+                    }
+                    else if (position == "right") {
+                        return this.position = { right: 0 };
+                    }
+                }
+            }
+        }
+        Vue.createApp(myVueApp).mount('.app');
+    </script>
+</body>
+
+</html>
